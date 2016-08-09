@@ -1,0 +1,26 @@
+{
+  "name": "bs-combogrid",
+  "title": "Bootstrap Combogrid",
+  "description": "JQuery Combogrid input for Twuitter Bootstrap v3.x",
+  "version": "0.1.0",
+  "homepage": "https://github.com/RodrigoBalest/bs-combogrid",
+  "author": {
+    "name": "Rodrigo Balest",
+    "email": "r.balest@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/RodrigoBalest/bs-combogrid.git"
+  },
+  "bugs": "https://github.com/RodrigoBalest/bs-combogrid/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/RodrigoBalest/bs-combogrid/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "~1.7"
+  },
+  "keywords": []
+}
