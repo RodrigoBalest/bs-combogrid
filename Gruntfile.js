@@ -24,6 +24,10 @@ module.exports = function(grunt) {
         src: ['src/jquery.<%= pkg.name %>.js'],
         dest: 'dist/jquery.<%= pkg.name %>.js'
       },
+      css: {
+        src: ['src/jquery.<%= pkg.name %>.css'],
+        dest: 'dist/jquery.<%= pkg.name %>.css'
+      }
     },
     uglify: {
       options: {
@@ -32,6 +36,13 @@ module.exports = function(grunt) {
       dist: {
         src: '<%= concat.dist.dest %>',
         dest: 'dist/jquery.<%= pkg.name %>.min.js'
+      },
+    },
+    cssmin: {
+      target: {
+        files: {
+          'dist/jquery.<%= pkg.name %>.min.css': '<%= concat.css.dest %>'
+        },
       },
     },
     qunit: {
@@ -74,6 +85,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);

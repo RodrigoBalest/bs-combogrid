@@ -1,11 +1,6 @@
-/*
- * bs-combogrid
- * https://github.com/RodrigoBalest/bs-combogrid
- *
- * Copyright (c) 2016 Rodrigo Balest
- * Licensed under the MIT license.
- */
-
+/*! Bootstrap Combogrid - v0.1.0 - 2016-08-09
+* https://github.com/RodrigoBalest/bs-combogrid
+* Copyright (c) 2016 Rodrigo Balest; Licensed MIT */
 (function($) {
 
   // The combogrid input field

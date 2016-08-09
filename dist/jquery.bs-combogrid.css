@@ -1,0 +1,22 @@
+/*! Bootstrap Combogrid - v0.1.0 - 2016-08-09
+* https://github.com/RodrigoBalest/bs-combogrid
+* Copyright (c) 2016 Rodrigo Balest; Licensed MIT */
+
+.cg-container {
+  position: absolute;
+  z-index: 1000;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+  min-width: 160px;
+}
+.cg-container td {
+  cursor: pointer;
+}
+.cg-container .pager {
+  margin: 0px;
+}
+.cg-loading {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZlcnNpb249IjEuMSI+PGNpcmNsZSBpZD0iY2lyY2xlIiBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9ImJsdWUiLz48YW5pbWF0ZSBpZD0iZ3JvdyIgeGxpbms6aHJlZj0iI2NpcmNsZSIgZHVyPSIwLjc1cyIgYXR0cmlidXRlTmFtZT0iciIgYXR0cnlidXRlVHlwZT0iWE1MIiB2YWx1ZXM9IjA7MjA7MjAiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PGFuaW1hdGUgaWQ9InZhbmlzaCIgeGxpbms6aHJlZj0iI2NpcmNsZSIgZHVyPSIwLjc1cyIgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgYXR0cnlidXRlVHlwZT0iWE1MIiB2YWx1ZXM9Ijc1Ozc1OzAiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PC9zdmc+");
+  background-size: 20px auto;
+  background-position: right 5px center;
+  background-repeat: no-repeat;
+}

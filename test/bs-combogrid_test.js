@@ -1,24 +1,6 @@
-(function($) {
-  /*
-    ======== A Handy Little QUnit Reference ========
-    http://api.qunitjs.com/
+/* globals sinon */
 
-    Test methods:
-      module(name, {[setup][ ,teardown]})
-      test(name, callback)
-      expect(numberOfAssertions)
-      stop(increment)
-      start(decrement)
-    Test assertions:
-      ok(value, [message])
-      equal(actual, expected, [message])
-      notEqual(actual, expected, [message])
-      deepEqual(actual, expected, [message])
-      notDeepEqual(actual, expected, [message])
-      strictEqual(actual, expected, [message])
-      notStrictEqual(actual, expected, [message])
-      throws(block, [expected], [message])
-  */
+(function($) {
 
   module('jQuery#bs_combogrid', {
     setup: function() {
@@ -43,7 +25,7 @@
   /***********************************************/
   test('an ajax call is made on enter keypress', function() {
     expect(1);
-    var spy = sinon.spy($, 'ajax');
+    sinon.spy($, 'ajax');
 
     this.elems.bs_combogrid();
     this.elems.triggerEnter();
@@ -58,7 +40,7 @@
     expect(this.elems.length);
 
     this.elems.each(function() {
-      var spy = sinon.spy($, 'ajax');
+      sinon.spy($, 'ajax');
       var $el = $(this);
 
       $el.bs_combogrid();
@@ -67,9 +49,9 @@
       $el.triggerEnter();
 
       var args = $.ajax.getCall(0).args[0];
-      ok(args.hasOwnProperty('data')
-        && args.data.hasOwnProperty($el.attr('name'))
-        && args.data[$el.attr('name')] == $el.val(), 'an ajax call should have been made with the expected ' + $el.attr('name') + ':' + $el.val() + ' pair');
+      ok(args.hasOwnProperty('data') &&
+        args.data.hasOwnProperty($el.attr('name')) &&
+        args.data[$el.attr('name')] === $el.val(), 'an ajax call should have been made with the expected ' + $el.attr('name') + ':' + $el.val() + ' pair');
 
       $.ajax.restore();
     });
@@ -80,7 +62,7 @@
     expect(this.elems.length * 2);
 
     this.elems.each(function() {
-      var spy = sinon.spy($, 'ajax');
+      sinon.spy($, 'ajax');
       var $el = $(this);
 
       $el.bs_combogrid();
@@ -96,8 +78,8 @@
 
   /***********************************************/
   test('ajax call sends start index number to server', function() {
-    var spy = sinon.spy($, 'ajax');
-    $el = this.elems.first();
+    sinon.spy($, 'ajax');
+    var $el = this.elems.first();
 
     $el.bs_combogrid();
     $el.triggerEnter();
@@ -116,7 +98,7 @@
       responseTime: [100, 200]
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid();
     $el.triggerEnter();
@@ -143,7 +125,7 @@
       responseText: ''
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid();
     $el.triggerEnter();
@@ -165,7 +147,7 @@
       responseText: {"data":[],"recordsTotal":0}
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid();
     $el.triggerEnter();
@@ -186,7 +168,7 @@
       responseText: {"data":[],"recordsTotal":0}
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid({
       emptyMessage: 'Akukho ziphumo afunyanwa!'
@@ -210,7 +192,7 @@
       responseText: 'Not found'
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid();
     $el.triggerEnter();
@@ -234,7 +216,7 @@
       }
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid();
     $el.triggerEnter();
@@ -260,7 +242,7 @@
       responseTime: [250, 750]
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
     $el.bs_combogrid();
     $el.triggerEnter();
 
@@ -286,7 +268,7 @@
       responseText: { data: sampleData[0], recordsTotal: 5 },
       responseTime: [10, 20]
     });
-    var spy = sinon.spy($, 'ajax');
+    sinon.spy($, 'ajax');
 
     var ajaxConfig = {
       url: 'this/is/data/url',
@@ -296,7 +278,7 @@
       }
     };
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
     $el.bs_combogrid({
       ajax: ajaxConfig
     });
@@ -314,10 +296,9 @@
 
   /***********************************************/
   test('can set the default number of items per page as config', function() {
-    var spy = sinon.spy($, 'ajax');
-    var $el = $(this);
+    sinon.spy($, 'ajax');
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid({
       length: 123
@@ -337,7 +318,7 @@
       responseTime: [100, 200]
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid({ length: 5});
     $el.triggerEnter();
@@ -348,14 +329,14 @@
 
       ok($paginator.length, 'container should have paginator');
 
-      $paginatorItems = $paginator.find('li');
+      var $paginatorItems = $paginator.find('li');
       equal($paginatorItems.length, 5, 'paginator should have 5 items');
       ok($paginatorItems.eq(0).hasClass('pFirst'), 'first paginator item should have class \'pFirst\'');
       ok($paginatorItems.eq(1).hasClass('pPrev'), 'second paginator item should have class \'pPrev\'');
       ok($paginatorItems.eq(4).hasClass('pNext'), 'last paginator item should have class \'pNext\'');
       ok($paginatorItems.eq(3).hasClass('pLast'), 'last but one paginator item should have class \'pLast\'');
 
-      $paginatorCounter = $paginatorItems.find('span');
+      var $paginatorCounter = $paginatorItems.find('span');
       ok($paginatorCounter.hasClass('pagerCounter'), 'third paginator item should have an span with class \'pagerCounter\'');
       equal($paginatorCounter.text(), '1/6', 'paginator counter should show \'currentPage/totalPages\'');
 
@@ -371,7 +352,7 @@
       responseTime: [100, 200]
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid({ length: 5});
     $el.triggerEnter();
@@ -412,26 +393,26 @@
         responseTime: [10, 20]
       }
     ]);
-    $el = this.elems.first();
+    var $el = this.elems.first();
     $el.bs_combogrid({ length: 5});
     $el.triggerEnter();
 
     var spy = sinon.spy($, 'ajax');
 
     setTimeout(function() {
-      $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
       $paginator.find('.pNext a').trigger('click');
       equal(spy.getCall(0).args[0].data.start, 5, 'Next link should send start = 5');
       setTimeout(function(){
-        $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
         $paginator.find('.pLast a').trigger('click');
         equal(spy.getCall(1).args[0].data.start, 10, 'Last link should send start = 10');
         setTimeout(function(){
-          $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+          var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
           $paginator.find('.pPrev a').trigger('click');
           equal(spy.getCall(2).args[0].data.start, 5, 'Previous link should send start = 5');
           setTimeout(function(){
-            $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+            var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
             $paginator.find('.pFirst a').trigger('click');
             equal(spy.getCall(3).args[0].data.start, 0, 'First link should send start = 0');
             start();
@@ -468,28 +449,28 @@
         responseTime: [10, 20]
       }
     ]);
-    $el = this.elems.first();
+    var $el = this.elems.first();
     $el.bs_combogrid({ length: 5});
     $el.triggerEnter();
 
     setTimeout(function() {
-      $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
       equal($paginator.find('.pagerCounter').text(), '1/3', 'Paginator counter should show \'1/3\'');
       $paginator.find('.pNext a').trigger('click');
       setTimeout(function(){
-        $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
         equal($paginator.find('.pagerCounter').text(), '2/3', 'Paginator counter should show \'2/3\'');
         $paginator.find('.pLast a').trigger('click');
         setTimeout(function(){
-          $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+          var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
           equal($paginator.find('.pagerCounter').text(), '3/3', 'Paginator counter should show \'3/3\'');
           $paginator.find('.pPrev a').trigger('click');
           setTimeout(function(){
-            $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+            var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
             equal($paginator.find('.pagerCounter').text(), '2/3', 'Paginator counter should show \'2/3\'');
             $paginator.find('.pFirst a').trigger('click');
             setTimeout(function(){
-              $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+              var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
               equal($paginator.find('.pagerCounter').text(), '1/3', 'Paginator counter should show \'1/3\'');
               start();
             }, 21);
@@ -509,13 +490,13 @@
       }
     ]);
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
     $el.bs_combogrid({ length: 5});
     $el.triggerEnter();
 
     var spy = sinon.spy($, 'ajax');
     setTimeout(function() {
-      $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
       $paginator.find('.pFirst a').trigger('click');
       equal(spy.callCount, 0, 'No ajax request should have been made.');
       ok($paginator.find('.pFirst').hasClass('disabled'), 'First paginator link should have \'disabled\' class');
@@ -541,17 +522,17 @@
       }
     ]);
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
     $el.bs_combogrid({ length: 5});
     $el.triggerEnter();
 
     var spy = sinon.spy($, 'ajax');
 
     setTimeout(function () {
-      $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
       $paginator.find('.pLast a').trigger('click'); // Let's go to the last page before testing
       setTimeout(function() {
-        $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
         $paginator.find('.pLast a').trigger('click');
         equal(spy.callCount, 1, 'No ajax request should have been made.');
         ok($paginator.find('.pLast').hasClass('disabled'), 'Last paginator link should have \'disabled\' class');
@@ -573,7 +554,7 @@
       responseTime: [10, 20]
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
 
     $el.bs_combogrid({
       length: 5,
@@ -584,8 +565,8 @@
     $el.triggerEnter();
 
     setTimeout(function(){
-      $tds = $('#' + $el.attr('id') + '-cg-container').find('td');
-      $td = $tds.eq(Math.floor(Math.random() * $tds.length));
+      var $tds = $('#' + $el.attr('id') + '-cg-container').find('td');
+      var $td = $tds.eq(Math.floor(Math.random() * $tds.length));
       $td.trigger('click');
       start();
     }, 21);
@@ -600,14 +581,14 @@
     });
 
     // We'll change our fixture here only for this testcase
-    $el = this.elems.first();
+    var $el = this.elems.first();
     $el.attr('name', 'console');
 
     $el.bs_combogrid();
     $el.triggerEnter();
 
     setTimeout(function(){
-      $td = $('#' + $el.attr('id') + '-cg-container').find('td:contains("Resident Evil")');
+      var $td = $('#' + $el.attr('id') + '-cg-container').find('td:contains("Resident Evil")');
       $td.trigger('click');
       equal($el.val(), 'Playstation', 'Input should have value = \'Playstation\'');
       start();
@@ -622,9 +603,9 @@
       responseTime: [10, 20]
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
     // We'll create a dummy div for testing
-    $dummy = $('<div />').text('Lorem ipsum dolor sit amet').insertAfter($el);
+    var $dummy = $('<div />').text('Lorem ipsum dolor sit amet').insertAfter($el);
 
     $el.bs_combogrid();
     $el.triggerEnter();
@@ -644,7 +625,7 @@
       responseTime: [10, 20]
     });
 
-    $el = this.elems.first();
+    var $el = this.elems.first();
     $el.bs_combogrid();
     $el.triggerEnter();
 
@@ -673,7 +654,7 @@
     return this.each(function() {
       $(this).trigger(e);
     });
-  }
+  };
 
   var sampleData = [
     [
