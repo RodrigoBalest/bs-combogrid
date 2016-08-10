@@ -46,7 +46,14 @@ module.exports = function(grunt) {
       },
     },
     qunit: {
-      files: ['test/**/*.html']
+      //files: ['test/**/*.html']
+      all: {
+        options: {
+          urls: ['1.9.1', '1.12.4', '2.2.4', '3.1.0'].map(function(version) {
+            return 'http://localhost:<%= connect.server.options.port %>/test/bs-combogrid.html?jquery=' + version;
+          })
+        }
+      }
     },
     jshint: {
       options: {
@@ -76,6 +83,13 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'qunit']
       },
     },
+    connect: {
+      server: {
+        options: {
+          port: 8080
+        }
+      }
+    }
   });
 
   // These plugins provide necessary tasks.
@@ -86,8 +100,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('default', ['connect', 'jshint', 'qunit', 'clean', 'concat', 'cssmin', 'uglify']);
+  grunt.registerTask('test', ['connect', 'jshint', 'qunit']);
 
 };

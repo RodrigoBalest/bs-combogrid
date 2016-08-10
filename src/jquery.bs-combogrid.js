@@ -100,7 +100,7 @@
     var comboGridInput = this.$el.data('bs_combogrid');
 
     this.setUp = function() {
-      var pos = _this.$el.offset();
+      var pos = _this.$el.position();
       pos.top = pos.top + _this.$el.outerHeight();
 
       this.container = $('<div />').attr({

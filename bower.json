@@ -1,19 +1,38 @@
 {
   "name": "bs-combogrid",
-  "version": "1.0.0",
   "description": "JQuery Combogrid input for Twitter Bootstrap v3.x",
+  "main": ["dist/jquery.bs-combogrid.js", "dist/jquery.bs-combogrid.css"],
+  "authors": [
+    {
+      "name" : "Rodrigo Balest",
+      "email" : "r.balest@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "bootstrap",
+    "combogrid",
+    "jquery",
+    "plugin"
+  ],
   "homepage": "https://github.com/RodrigoBalest/bs-combogrid",
-  "engines": {
-    "node": ">= 0.8.0"
-  },
-  "author": {
-    "name" : "Rodrigo Balest",
-    "email" : "r.balest@gmail.com"
-  },
-  "scripts": {
-    "test": "grunt test",
-    "demo": "node ./demo/server.js"
-  },
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "demo",
+    "libs",
+    "src",
+    "bs-combogrid.jquery.json",
+    "CONTRIBUTING.md",
+    "Gruntfile.js",
+    "LICENSE-MIT",
+    "package.json",
+    "README.md"
+  ],
   "dependencies": {
     "jquery": "1.9 - 3.1",
     "bootstrap": "3"

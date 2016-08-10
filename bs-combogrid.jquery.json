@@ -2,7 +2,7 @@
   "name": "bs-combogrid",
   "title": "Bootstrap Combogrid",
   "description": "JQuery Combogrid input for Twitter Bootstrap v3.x",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/RodrigoBalest/bs-combogrid",
   "author": {
     "name": "Rodrigo Balest",
@@ -20,7 +20,7 @@
     }
   ],
   "dependencies": {
-    "jquery": "~1.7"
+    "jquery": "1.9 - 3.1"
   },
   "keywords": []
 }
