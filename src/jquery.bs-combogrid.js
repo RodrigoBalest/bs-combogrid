@@ -18,13 +18,10 @@
 
     this.loadResultsPage = function(start, length) {
       var data = {
-        /* jshint ignore:start */
-        //[_this.$el.attr('name')] : _this.$el.val(),                  // Input field value
-        /* jshint ignore:end */
         length: (length === undefined) ? this.config.length : length, // Number of items per page expected to be returned by the server
         start: (start === undefined) ? 0 : start                      // Index of first item expected to be returned by the server
       };
-      data[_this.$el.attr('name')] = _this.$el.val();
+      data[_this.$el.attr('name')] = _this.$el.val(); // Input field value
 
       this.config.ajax.data = $.extend(true, {}, this.config.ajax.data, data); // Merge user defined ajax data with plugin's ajax data
 
@@ -183,22 +180,45 @@
     this.$container = $(container);
     var comboGridInput = this.$el.data('bs_combogrid');
 
+    var hasColModel = comboGridInput.config.colModel instanceof Object;
+
     this.setUp = function() {
       var $t = $('<table />').addClass('table table-hover');
-      var $tBody = $t.append('<tbody />').find('tbody');
-
-      for(var i in this.data.data) {
-        var $tr = $('<tr />');
-        var rowData = this.data.data[i];
-        for(var k in rowData) {
-          $('<td />').text(rowData[k]).appendTo($tr);
+      // If the developer informed a colModel, a tHead is created
+      if(hasColModel) {
+        var $tHead = $('<thead />');
+        var $tHeadRow = $tHead.append('<tr />').find('tr');
+        for(var colName in comboGridInput.config.colModel) {
+          $('<th />').text(comboGridInput.config.colModel[colName]).appendTo($tHeadRow);
         }
-        $tr.data(rowData).appendTo($tBody);
+        $tHead.appendTo($t);
       }
+      generateTableBody($t, this.data.data);
+
       $t.appendTo(this.$container);
       this.$table = $t;
       this.setUpListeners();
     };
+
+    function generateTableBody($t, data) {
+      // Adds a tbody to the table
+      var $tBody = $t.append('<tbody />').find('tbody');
+      // Builds the table rows with data
+      for(var i in data) {
+        var $tr = $('<tr />');
+        var rowData = data[i];
+        if(hasColModel) { // If we have a colModel definition, order rows' cells according to it...
+          for(var colName in comboGridInput.config.colModel) {
+            $('<td />').text(rowData[colName]).appendTo($tr);
+          }
+        } else { // If we don't, order row's cells as returned from the server.
+          for(var k in rowData) {
+            $('<td />').text(rowData[k]).appendTo($tr);
+          }
+        }
+        $tr.data(rowData).appendTo($tBody);
+      }
+    }
 
     this.setUpListeners = function() {
       this.$table.on("click", "tr", function() {

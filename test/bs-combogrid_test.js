@@ -289,8 +289,8 @@
       equal(ajaxData.url, ajaxConfig.url, 'ajax should have been called with url = \'' + ajaxConfig.url +'\'');
       equal(ajaxData.method, ajaxConfig.method, 'ajax should have been called with method = \'' + ajaxConfig.method +'\'');
       equal(ajaxData.data.somedata, ajaxConfig.data.somedata, 'ajax should have been called with extra data');
-      start();
       $.ajax.restore();
+      start();
     }, 21);
   });
 
@@ -632,6 +632,36 @@
     setTimeout(function () {
       $el.triggerEsc();
       equal($el.parent().find('.cg-container').length, 0, 'There should not have any combogrid container');
+      start();
+    }, 25);
+  });
+
+  /***********************************************/
+  asyncTest('User can configure fields titles as \'colModel\' config parameter', function() {
+    $.mockjax({
+      url: '*',
+      responseText: { data: sampleData[0], recordsTotal: 12 },
+      responseTime: [10, 20]
+    });
+
+    var $el = this.elems.first();
+    $el.bs_combogrid({
+      colModel: {
+        "title": "Game's title",
+        "console": "Console's title"
+      }
+    });
+    $el.triggerEnter();
+
+    setTimeout(function () {
+      var $table = $el.parent().find('.cg-container table');
+      var $tHead = $table.find('thead');
+      equal($tHead.length, 1, 'There should have a thead element in results table');
+      equal($tHead.find('th').eq(0).text(), "Game's title", "First column's title should be 'Game's title'");
+      equal($tHead.find('th').eq(1).text(), "Console's title", "Second column's title should be 'Console's title'");
+      var $tBody = $table.find('tbody');
+      equal($tBody.find('td').eq(0).text(), "Super Mario Bros", "First column's text should match table's title");
+      equal($tBody.find('td').eq(1).text(), "Nintendo", "Second column's text should match table's title");
       start();
     }, 25);
   });
