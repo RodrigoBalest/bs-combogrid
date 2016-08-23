@@ -1,4 +1,4 @@
-/*! Bootstrap Combogrid - v1.0.0 - 2016-08-11
+/*! Bootstrap Combogrid - v1.0.0 - 2016-08-23
 * https://github.com/RodrigoBalest/bs-combogrid
 * Copyright (c) 2016 Rodrigo Balest; Licensed MIT */
 (function($) {
@@ -74,10 +74,18 @@
       this.$el.on('keypress', function(ev) {
         var keycode = (ev.keyCode ? ev.keyCode : ev.which);
         if(keycode === 13) {
-          _this.page = 1;
-          _this.loadResultsPage();
+          _this.goToFirstPage();
         }
       });
+
+      // Listen to clicks on a searchButton, if specified.
+      if(this.config.searchButton) {
+        $(document).on('click', this.config.searchButton, function(ev) {
+          ev.preventDefault();
+          _this.goToFirstPage();
+        });
+
+      }
 
     };
 
@@ -305,6 +313,7 @@
     length: 10,
     emptyMessage: 'No results were found',
     ajax: {},
+    searchButton: false,
     // If the clicked item has a property named equal to input's name,
   	// sets input's value the same as property's value
   	onItemSelect: function(item) {

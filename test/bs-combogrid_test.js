@@ -667,6 +667,30 @@
   });
 
   /***********************************************/
+  asyncTest('Can trigger search on clicking a specific button', function() {
+    $.mockjax({
+      url: '*',
+      responseText: { data: sampleData[0], recordsTotal: 12 },
+      responseTime: [10, 20]
+    });
+
+    var $el = this.elems.first();
+    // Create a button for testing
+    $el.after('<button id="trigger-btn" />Click Me!</button>');
+    $el.bs_combogrid({
+      searchButton: '#trigger-btn'
+    });
+    var spy = sinon.spy($, 'ajax');
+
+    $('#trigger-btn').trigger('click');
+
+    setTimeout(function () {
+      equal(spy.callCount, 1, 'An ajax request should have been made.');
+      start();
+    }, 25);
+  });
+
+  /***********************************************/
   // HELPER FUNCTIONS
   $.fn.triggerEnter = function() {
     var e = $.Event('keypress');
