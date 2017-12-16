@@ -7,8 +7,8 @@
     "node": ">= 0.8.0"
   },
   "author": {
-    "name" : "Rodrigo Balest",
-    "email" : "r.balest@gmail.com"
+    "name": "Rodrigo Balest",
+    "email": "r.balest@gmail.com"
   },
   "scripts": {
     "test": "grunt test",
