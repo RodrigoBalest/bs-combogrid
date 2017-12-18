@@ -1,3 +1,4 @@
+/* jshint latedef: nofunc */
 /*
  * bs-combogrid
  * https://github.com/RodrigoBalest/bs-combogrid
@@ -168,8 +169,8 @@
         this.table = new ComboGridTable(this.$el, this.data, this.container);
         // Show paginator only when needed
         if (
-          typeof this.data.recordsTotal === 'number'
-          && this.data.recordsTotal > this.data.data.length
+          typeof this.data.recordsTotal === 'number' &&
+          this.data.recordsTotal > this.data.data.length
         ) {
           this.paginator = new ComboGridPaginator(this.$el, this.data, this.container);
         }

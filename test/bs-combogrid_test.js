@@ -2,6 +2,8 @@
 
 (function($) {
 
+  var sampleData;
+
   module('jQuery#bs_combogrid', {
     setup: function() {
       this.elems = $('#qunit-fixture').find('input');
@@ -710,7 +712,7 @@
     });
   };
 
-  var sampleData = [
+  sampleData = [
     [
       { console: 'Nintendo', title: 'Super Mario Bros' },
       { console: 'Master System', title: 'Alex Kidd' },

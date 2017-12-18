@@ -1,6 +1,14 @@
-/*! Bootstrap Combogrid - v1.0.0 - 2016-08-23
+/*! Bootstrap Combogrid - v1.0.0 - 2017-12-18
 * https://github.com/RodrigoBalest/bs-combogrid
-* Copyright (c) 2016 Rodrigo Balest; Licensed MIT */
+* Copyright (c) 2017 Rodrigo Balest; */
+/*
+ * bs-combogrid
+ * https://github.com/RodrigoBalest/bs-combogrid
+ *
+ * Copyright (c) 2016 Rodrigo Balest
+ * Licensed under the MIT license.
+ */
+
 (function($) {
 
   // The combogrid input field
@@ -13,27 +21,45 @@
 
     this.loadResultsPage = function(start, length) {
       var data = {
-        length: (length === undefined) ? this.config.length : length, // Number of items per page expected to be returned by the server
-        start: (start === undefined) ? 0 : start                      // Index of first item expected to be returned by the server
+        // Number of items per page expected to be returned by the server.
+        length: (length === undefined) ? this.config.length : length,
+        // Index of first item expected to be returned by the server.
+        start: (start === undefined) ? 0 : start                      
       };
-      data[_this.$el.attr('name')] = _this.$el.val(); // Input field value
+      // Input field value.
+      // If `<input type="text" name="search" value="lorem" />`,
+      // then `data.search = 'lorem'`
+      data[_this.$el.attr('name')] = _this.$el.val();
 
-      this.config.ajax.data = $.extend(true, {}, this.config.ajax.data, data); // Merge user defined ajax data with plugin's ajax data
+      // Merge user defined ajax data with the parameters
+      // set above on `data` object.
+      this.config.ajax.data = $.extend(true, {}, this.config.ajax.data, data);
 
       this.$el.addClass('cg-loading');
 
       // Make ajax request
-      $.ajax(this.config.ajax).always(function() {
-        _this.clearContainer(); // Removes combogrid container, if there's one
-        _this.$el.removeClass('cg-loading');
-      }).done(function(data) {
-        _this.data = data;
-        _this.container = new ComboGridContainer(_this.$el, data); // Creates container with results
-      }).fail(function(jqXHR) {
-        _this.container = new ComboGridContainer(_this.$el, { // Creates container with error message
-          error: jqXHR.status + ': ' + jqXHR.responseText
+      $.ajax(this.config.ajax)
+        // When server responds...
+        .always(function() {
+          // ...removes combogrid container, if there's one...
+          _this.clearContainer();
+          // ...and removes loading class from input.
+          _this.$el.removeClass('cg-loading');
+        })
+        // When server responds with success...
+        .done(function(data) {
+          // ...stores the returned data...
+          _this.data = data;
+          // ...and creates container with results.
+          _this.container = new ComboGridContainer(_this.$el, data);
+        })
+        // When server responds with error...
+        .fail(function(jqXHR) {
+          // ...creates container with error message.
+          _this.container = new ComboGridContainer(_this.$el, {
+            error: jqXHR.status + ': ' + jqXHR.responseText
+          });
         });
-      });
     };
 
     this.goToFirstPage = function() {
@@ -42,33 +68,48 @@
     };
 
     this.goToLastPage = function() {
+      // recordsTotal: the total number of records matching the search.
+      // length: the number of records in the returned page.
       var numPages = Math.ceil(this.data.recordsTotal / this.data.data.length);
       this.page = numPages;
+      // Get index of first record in the last page.
       var index = (numPages - 1) * this.config.length;
       this.loadResultsPage(index);
     };
 
     this.goToPreviousPage = function() {
       this.page--;
-      if(this.page <= 0){ this.page = 1; }
+      // We can't go below the first page.
+      if(this.page <= 0){
+        this.page = 1;
+      }
+      // Get index of first record in the previous page.
       var index = (this.page - 1) * this.config.length;
       this.loadResultsPage(index);
     };
 
     this.goToNextPage = function() {
       this.page++;
+      // recordsTotal: the total number of records matching the search.
+      // length: the number of records in the returned page.
       var numPages = Math.ceil(this.data.recordsTotal / this.data.data.length);
-      if(this.page > numPages){ this.page = numPages; }
+      // We can't go above the last page.
+      if(this.page > numPages){
+        this.page = numPages;
+      }
+      // Get index of first record in the next page.
       var index = (this.page - 1) * this.config.length;
       this.loadResultsPage(index);
     };
 
+    // Empties and removes the results container.
     this.clearContainer = function() {
       if(this.container !== undefined) {
         this.container.clear();
       }
     };
 
+    // Sets up the events on the element.
     this.setUp = function() {
       // Make ajax call on 'enter'
       this.$el.on('keypress', function(ev) {
@@ -84,11 +125,10 @@
           ev.preventDefault();
           _this.goToFirstPage();
         });
-
       }
-
     };
 
+    // Start everything!
     this.setUp();
   }
 
@@ -100,9 +140,12 @@
     var comboGridInput = this.$el.data('bs_combogrid');
 
     this.setUp = function() {
+      // Let's align the container to the left
+      // and right below the input.
       var pos = _this.$el.position();
       pos.top = pos.top + _this.$el.outerHeight();
 
+      // TODO: panel(v3) -> card(v4)
       this.container = $('<div />').attr({
         id: _this.$el.attr('id') + '-cg-container',
         class: 'cg-container panel panel-default'
@@ -115,10 +158,10 @@
     };
 
     this.setContents = function() {
-      if( ! this.data.hasOwnProperty('error') && ! $.isArray(this.data.data) ) {
+      if ( ! this.data.hasOwnProperty('error') && ! $.isArray(this.data.data) ) {
         this.showMessage('Server must return an array of data or an error message', 'danger');
       }
-      else if(this.data.error) {
+      else if (this.data.error) {
         this.showMessage(this.data.error, 'danger');
       }
       else if (this.data.recordsTotal === 0 || this.data.data.length === 0) {
@@ -126,7 +169,11 @@
       }
       else {
         this.table = new ComboGridTable(this.$el, this.data, this.container);
-        if( typeof this.data.recordsTotal === 'number' && this.data.recordsTotal > this.data.data.length) { // Show paginator only when needed
+        // Show paginator only when needed
+        if (
+          typeof this.data.recordsTotal === 'number' &&
+          this.data.recordsTotal > this.data.data.length
+        ) {
           this.paginator = new ComboGridPaginator(this.$el, this.data, this.container);
         }
       }
@@ -144,6 +191,8 @@
       this.container.remove();
     };
 
+    // TODO: Check if these events are not triggered multiple times
+    // os subsequent searches.
     this.setUpEvents = function() {
       $(document).on('click', checkClickedOutside);
       this.$el.on('keypress', checkEscPressed);
@@ -155,11 +204,13 @@
       elements.push(_this.container);
 
       $.each(elements, function(key, value) {
-          if (!$(value).is(ev.target) && // if the target of the click isn't the container...
-              $(value).has(ev.target).length === 0) // ... nor a descendant of the container
-          {
-              _this.clear();
-              $(document).off('click', checkClickedOutside);
+          if (
+            !$(value).is(ev.target) && // if the target of the click isn't the container...
+            $(value).has(ev.target).length === 0 // ... nor a descendant of the container,...
+          ) {
+            // ...removes the container and the click target check listener.
+            _this.clear();
+            $(document).off('click', checkClickedOutside);
           }
       });
     }
@@ -303,7 +354,10 @@
   $.fn.bs_combogrid = function(config) {
     return this.each(function() {
       var $el = $(this);
-      if($el.data('bs_combogrid')) { return; } // Instantiate only once
+      // Instantiate only once
+      if($el.data('bs_combogrid')) {
+        return;
+      }
       $el.data('bs_combogrid', new ComboGridInput(this, config));
     });
   };
@@ -312,6 +366,7 @@
   $.fn.bs_combogrid.defaults = {
     length: 10,
     emptyMessage: 'No results were found',
+    // `ajax` accepts the same parameters as `jQuery.ajax()`.
     ajax: {},
     searchButton: false,
     // If the clicked item has a property named equal to input's name,

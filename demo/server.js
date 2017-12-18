@@ -5,10 +5,12 @@ var app = express();
 
 const PORT=8080;
 
+var sampleData;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var sampleData = [
+sampleData = [
   { console: 'Nintendo', title: 'Super Mario Bros' },
   { console: 'Master System', title: 'Alex Kidd' },
   { console: 'Mega Drive', title: 'Sonic the Hedgehog' },
