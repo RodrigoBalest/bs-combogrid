@@ -327,7 +327,7 @@
 
     setTimeout(function() {
       var $container = $('#qunit-fixture').find('#' + $el.attr('id') + '-cg-container');
-      var $paginator = $container.find('nav .pager');
+      var $paginator = $container.find('nav .pagination');
 
       ok($paginator.length, 'container should have paginator');
 
@@ -335,8 +335,8 @@
       equal($paginatorItems.length, 5, 'paginator should have 5 items');
       ok($paginatorItems.eq(0).hasClass('pFirst'), 'first paginator item should have class \'pFirst\'');
       ok($paginatorItems.eq(1).hasClass('pPrev'), 'second paginator item should have class \'pPrev\'');
-      ok($paginatorItems.eq(4).hasClass('pNext'), 'last paginator item should have class \'pNext\'');
-      ok($paginatorItems.eq(3).hasClass('pLast'), 'last but one paginator item should have class \'pLast\'');
+      ok($paginatorItems.eq(3).hasClass('pNext'), 'last but one paginator item should have class \'pNext\'');
+      ok($paginatorItems.eq(4).hasClass('pLast'), 'last paginator item should have class \'pLast\'');
 
       var $paginatorCounter = $paginatorItems.find('span');
       ok($paginatorCounter.hasClass('pagerCounter'), 'third paginator item should have an span with class \'pagerCounter\'');
@@ -361,7 +361,7 @@
 
     setTimeout(function() {
       var $container = $('#qunit-fixture').find('#' + $el.attr('id') + '-cg-container');
-      var $paginator = $container.find('nav .pager');
+      var $paginator = $container.find('nav .pagination');
 
       ok( ! $paginator.length, 'container should not have a paginator');
 
@@ -402,19 +402,19 @@
     var spy = sinon.spy($, 'ajax');
 
     setTimeout(function() {
-      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
       $paginator.find('.pNext a').trigger('click');
       equal(spy.getCall(0).args[0].data.start, 5, 'Next link should send start = 5');
       setTimeout(function(){
-        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
         $paginator.find('.pLast a').trigger('click');
         equal(spy.getCall(1).args[0].data.start, 10, 'Last link should send start = 10');
         setTimeout(function(){
-          var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+          var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
           $paginator.find('.pPrev a').trigger('click');
           equal(spy.getCall(2).args[0].data.start, 5, 'Previous link should send start = 5');
           setTimeout(function(){
-            var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+            var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
             $paginator.find('.pFirst a').trigger('click');
             equal(spy.getCall(3).args[0].data.start, 0, 'First link should send start = 0');
             start();
@@ -456,23 +456,23 @@
     $el.triggerEnter();
 
     setTimeout(function() {
-      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
       equal($paginator.find('.pagerCounter').text(), '1/3', 'Paginator counter should show \'1/3\'');
       $paginator.find('.pNext a').trigger('click');
       setTimeout(function(){
-        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
         equal($paginator.find('.pagerCounter').text(), '2/3', 'Paginator counter should show \'2/3\'');
         $paginator.find('.pLast a').trigger('click');
         setTimeout(function(){
-          var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+          var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
           equal($paginator.find('.pagerCounter').text(), '3/3', 'Paginator counter should show \'3/3\'');
           $paginator.find('.pPrev a').trigger('click');
           setTimeout(function(){
-            var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+            var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
             equal($paginator.find('.pagerCounter').text(), '2/3', 'Paginator counter should show \'2/3\'');
             $paginator.find('.pFirst a').trigger('click');
             setTimeout(function(){
-              var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+              var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
               equal($paginator.find('.pagerCounter').text(), '1/3', 'Paginator counter should show \'1/3\'');
               start();
             }, 21);
@@ -498,7 +498,7 @@
 
     var spy = sinon.spy($, 'ajax');
     setTimeout(function() {
-      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
       $paginator.find('.pFirst a').trigger('click');
       equal(spy.callCount, 0, 'No ajax request should have been made.');
       ok($paginator.find('.pFirst').hasClass('disabled'), 'First paginator link should have \'disabled\' class');
@@ -531,10 +531,10 @@
     var spy = sinon.spy($, 'ajax');
 
     setTimeout(function () {
-      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+      var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
       $paginator.find('.pLast a').trigger('click'); // Let's go to the last page before testing
       setTimeout(function() {
-        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pager');
+        var $paginator = $el.parent().find('#' + $el.attr('id') + '-cg-container').find('.pagination');
         $paginator.find('.pLast a').trigger('click');
         equal(spy.callCount, 1, 'No ajax request should have been made.');
         ok($paginator.find('.pLast').hasClass('disabled'), 'Last paginator link should have \'disabled\' class');

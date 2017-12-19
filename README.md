@@ -1,6 +1,6 @@
 # Bootstrap Combogrid
 
-JQuery Combogrid input for Twitter Bootstrap v3.x
+JQuery Combogrid input for Twitter Bootstrap v4.x
 
 ## Getting Started
 

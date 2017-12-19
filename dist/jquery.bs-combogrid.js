@@ -1,4 +1,4 @@
-/*! Bootstrap Combogrid - v1.0.0 - 2017-12-18
+/*! Bootstrap Combogrid - v1.0.0 - 2017-12-19
 * https://github.com/RodrigoBalest/bs-combogrid
 * Copyright (c) 2017 Rodrigo Balest; */
 /*
@@ -145,10 +145,9 @@
       var pos = _this.$el.position();
       pos.top = pos.top + _this.$el.outerHeight();
 
-      // TODO: panel(v3) -> card(v4)
       this.container = $('<div />').attr({
         id: _this.$el.attr('id') + '-cg-container',
-        class: 'cg-container panel panel-default'
+        class: 'cg-container card'
       }).css({
         top: pos.top,
         left: pos.left
@@ -237,7 +236,7 @@
     var hasColModel = comboGridInput.config.colModel instanceof Object;
 
     this.setUp = function() {
-      var $t = $('<table />').addClass('table table-hover');
+      var $t = $('<table />').addClass('table').addClass(comboGridInput.config.tableClass);
       // If the developer informed a colModel, a tHead is created
       if(hasColModel) {
         var $tHead = $('<thead />');
@@ -289,10 +288,10 @@
     this.data = data;
     this.$container = $(container);
     this.config = {
-  	  firstLabel: '<span class="glyphicon glyphicon-fast-backward"></span>',
-  	  previousLabel: '<span class="glyphicon glyphicon-backward"></span>',
-  	  nextLabel: '<span class="glyphicon glyphicon-forward"></span>',
-  	  lastLabel: '<span class="glyphicon glyphicon-fast-forward"></span>',
+  	  firstLabel: '⏪',
+  	  previousLabel: '◀',
+  	  nextLabel: '▶',
+  	  lastLabel: '⏩',
   	};
 
     var comboGridInput = this.$el.data('bs_combogrid');
@@ -300,13 +299,13 @@
     var page = comboGridInput.page;
 
     this.setUp = function() {
-      var $pager = $('<nav class="panel-footer">' +
-    	  '  <ul class="pager">' +
-    	  '    <li class="previous pFirst"><a href="#">' + this.config.firstLabel + '</a></li>' +
-    	  '    <li class="previous pPrev"><a href="#">' + this.config.previousLabel + '</a></li>' +
-    	  '    <li><span class="pagerCounter">' + page + '/' + numPages + '</span></li>' +
-    	  '    <li class="next pLast"><a href="#">' + this.config.lastLabel + '</a></li>' +
-    	  '    <li class="next pNext"><a href="#">' + this.config.nextLabel + '</a></li>' +
+      var $pager = $('<nav class="card-footer">' +
+    	  '  <ul class="pagination pagination-sm justify-content-center mb-0">' +
+    	  '    <li class="page-item previous pFirst"><a class="page-link" href="#">' + this.config.firstLabel + '</a></li>' +
+    	  '    <li class="page-item previous pPrev"><a class="page-link" href="#">' + this.config.previousLabel + '</a></li>' +
+    	  '    <li class="page-item disabled"><span class="pagerCounter page-link">' + page + '/' + numPages + '</span></li>' +
+        '    <li class="page-item next pNext"><a class="page-link" href="#">' + this.config.nextLabel + '</a></li>' +
+    	  '    <li class="page-item next pLast"><a class="page-link" href="#">' + this.config.lastLabel + '</a></li>' +
     	  '  </ul>' +
     	  '</nav>');
       if(page <= 1) {
@@ -377,6 +376,7 @@
   	     $this.val(item[$this.attr('name')]);
        }
   	},
+    tableClass: 'mb-0 table-hover table-sm'
   };
 
 }(jQuery));

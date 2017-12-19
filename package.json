@@ -1,7 +1,7 @@
 {
   "name": "bs-combogrid",
-  "version": "1.0.3",
-  "description": "JQuery Combogrid input for Twitter Bootstrap v3.x",
+  "version": "2.0.0",
+  "description": "JQuery Combogrid input for Twitter Bootstrap v4.x",
   "homepage": "https://github.com/RodrigoBalest/bs-combogrid",
   "engines": {
     "node": ">= 6.10"
@@ -15,8 +15,7 @@
     "demo": "node ./demo/server.js"
   },
   "dependencies": {
-    "jquery": "1.9 - 3.1",
-    "bootstrap": "3"
+    "jquery": "1.9 - 3.1"
   },
   "devDependencies": {
     "body-parser": "^1.18.2",
