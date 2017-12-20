@@ -18,7 +18,12 @@
 
       <div class="form-group">
         <label for="search">Search</label>
-        <input type="text" name="title" id="search" class="form-control" />
+        <div class="input-group">
+          <input type="text" name="title" id="search" class="form-control" />
+          <span class="input-group-btn">
+            <button id="btn-search" class="btn btn-secondary" type="button">Go!</button>
+          </span>
+        </div>
       </div>
 
     </div>
@@ -28,7 +33,13 @@
         length: 5,
         ajax: {
           url: 'datasource'
-        }
+        },
+        colModel: {
+          console: 'Console name',
+          title: 'Game title'
+        },
+        emptyMessage: 'Nothing found!',
+        searchButton: '#btn-search'
       });
     </script>
   </body>

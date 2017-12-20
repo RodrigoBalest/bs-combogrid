@@ -1,3 +1,4 @@
 /node_modules/
 check-bower.js
 yarn-error.log
+*.sublime-workspace

@@ -273,8 +273,8 @@
 
     this.setUpListeners = function() {
       this.$table.on("click", "tr", function() {
-    	  comboGridInput.config.onItemSelect.call(_this.$el, $(this).data());
-    	});
+        comboGridInput.config.onItemSelect.call(_this.$el, $(this).data());
+      });
     };
 
     this.setUp();
@@ -286,11 +286,11 @@
     this.data = data;
     this.$container = $(container);
     this.config = {
-  	  firstLabel: '⏪',
-  	  previousLabel: '◀',
-  	  nextLabel: '▶',
-  	  lastLabel: '⏩',
-  	};
+      firstLabel: '⏪',
+      previousLabel: '◀',
+      nextLabel: '▶',
+      lastLabel: '⏩',
+    };
 
     var comboGridInput = this.$el.data('bs_combogrid');
     var numPages = Math.ceil(data.recordsTotal / comboGridInput.config.length);
@@ -298,14 +298,14 @@
 
     this.setUp = function() {
       var $pager = $('<nav class="card-footer">' +
-    	  '  <ul class="pagination pagination-sm justify-content-center mb-0">' +
-    	  '    <li class="page-item previous pFirst"><a class="page-link" href="#">' + this.config.firstLabel + '</a></li>' +
-    	  '    <li class="page-item previous pPrev"><a class="page-link" href="#">' + this.config.previousLabel + '</a></li>' +
-    	  '    <li class="page-item disabled"><span class="pagerCounter page-link">' + page + '/' + numPages + '</span></li>' +
+        '  <ul class="pagination pagination-sm justify-content-center mb-0">' +
+        '    <li class="page-item previous pFirst"><a class="page-link" href="#">' + this.config.firstLabel + '</a></li>' +
+        '    <li class="page-item previous pPrev"><a class="page-link" href="#">' + this.config.previousLabel + '</a></li>' +
+        '    <li class="page-item disabled"><span class="pagerCounter page-link">' + page + '/' + numPages + '</span></li>' +
         '    <li class="page-item next pNext"><a class="page-link" href="#">' + this.config.nextLabel + '</a></li>' +
-    	  '    <li class="page-item next pLast"><a class="page-link" href="#">' + this.config.lastLabel + '</a></li>' +
-    	  '  </ul>' +
-    	  '</nav>');
+        '    <li class="page-item next pLast"><a class="page-link" href="#">' + this.config.lastLabel + '</a></li>' +
+        '  </ul>' +
+        '</nav>');
       if(page <= 1) {
         $pager.find('.pFirst, .pPrev').addClass('disabled');
       }
@@ -367,13 +367,13 @@
     ajax: {},
     searchButton: false,
     // If the clicked item has a property named equal to input's name,
-  	// sets input's value the same as property's value
-  	onItemSelect: function(item) {
-  	  var $this = $(this);
-  	  if(typeof item[$this.attr('name')] !== undefined) {
-  	     $this.val(item[$this.attr('name')]);
+    // sets input's value the same as property's value
+    onItemSelect: function(item) {
+      var $this = $(this);
+      if(typeof item[$this.attr('name')] !== undefined) {
+         $this.val(item[$this.attr('name')]);
        }
-  	},
+    },
     tableClass: 'mb-0 table-hover table-sm'
   };
 
