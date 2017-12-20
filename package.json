@@ -1,6 +1,6 @@
 {
   "name": "bs-combogrid",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "JQuery Combogrid input for Twitter Bootstrap v4.x",
   "homepage": "https://github.com/RodrigoBalest/bs-combogrid",
   "engines": {
@@ -14,6 +14,7 @@
     "test": "grunt test",
     "demo": "node ./demo/server.js"
   },
+  "main": "./dist/jquery.bs-combogrid.min.js",
   "dependencies": {
     "jquery": "1.9 - 3.1"
   },
