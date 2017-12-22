@@ -44,10 +44,14 @@ app.get('/datasource', function(req, res) {
     return item.console.toLowerCase().indexOf(req.query.title.toLowerCase()) !== -1
       || item.title.toLowerCase().indexOf(req.query.title.toLowerCase()) !== -1
   });
-  res.json({
-    data: results.slice(parseInt(req.query.start), parseInt(req.query.start) + parseInt(req.query.length)),
-    recordsTotal: results.length
-  });
+  var respond = function() {
+    res.json({
+      data: results.slice(parseInt(req.query.start), parseInt(req.query.start) + parseInt(req.query.length)),
+      recordsTotal: results.length
+    });
+  }
+  // Simulate 1000ms latency.
+  setTimeout(respond, 1000);
 });
 
 app.listen(PORT, function () {

@@ -1,4 +1,4 @@
-/*! Bootstrap Combogrid - v2.0.0 - 2017-12-20
+/*! Bootstrap Combogrid - v2.0.2 - 2017-12-22
 * https://github.com/RodrigoBalest/bs-combogrid
 * Copyright (c) 2017 Rodrigo Balest; */
 /*
@@ -193,28 +193,24 @@
     // TODO: Check if these events are not triggered multiple times
     // os subsequent searches.
     this.setUpEvents = function() {
-      $(document).on('click', checkClickedOutside);
-      this.$el.on('keypress', checkEscPressed);
+      $(document).on('click', clearIfItShould);
+      this.$el.on('keypress', clearIfEscPressed);
     };
 
-    function checkClickedOutside(ev) {
-      var elements = [];
-      elements.push(_this.$el);
-      elements.push(_this.container);
-
-      $.each(elements, function(key, value) {
-          if (
-            !$(value).is(ev.target) && // if the target of the click isn't the container...
-            $(value).has(ev.target).length === 0 // ... nor a descendant of the container,...
-          ) {
-            // ...removes the container and the click target check listener.
-            _this.clear();
-            $(document).off('click', checkClickedOutside);
-          }
-      });
+    function clearIfItShould(ev) {
+      if(
+        // if the target is not the input...
+        ! _this.$el.is(ev.target) &&
+        // ...and is not one of the pager's links...
+        ! _this.container.find('.page-link').is(ev.target)
+      ) {
+        // ...removes the container and this listener.
+        _this.clear();
+        $(document).off('click', clearIfItShould);
+      }
     }
 
-    function checkEscPressed(ev) {
+    function clearIfEscPressed(ev) {
         var keycode = (ev.keyCode ? ev.keyCode : ev.which);
         if(keycode === 27) {
           _this.clear();
