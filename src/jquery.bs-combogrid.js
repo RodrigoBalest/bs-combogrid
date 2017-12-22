@@ -151,6 +151,10 @@
         left: pos.left
       }).insertAfter(_this.$el);
 
+      if (comboGridInput.config.containerWidth) {
+        this.container.css('width', comboGridInput.config.containerWidth);
+      }
+
       this.setUpEvents();
     };
 
@@ -370,7 +374,8 @@
          $this.val(item[$this.attr('name')]);
        }
     },
-    tableClass: 'mb-0 table-hover table-sm'
+    tableClass: 'mb-0 table-hover table-sm',
+    containerWidth: null
   };
 
 }(jQuery));

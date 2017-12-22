@@ -1,4 +1,4 @@
-/*! Bootstrap Combogrid - v2.0.2 - 2017-12-22
+/*! Bootstrap Combogrid - v2.0.3 - 2017-12-22
 * https://github.com/RodrigoBalest/bs-combogrid
 * Copyright (c) 2017 Rodrigo Balest; */
 /*
@@ -152,6 +152,10 @@
         top: pos.top,
         left: pos.left
       }).insertAfter(_this.$el);
+
+      if (comboGridInput.config.containerWidth) {
+        this.container.css('width', comboGridInput.config.containerWidth);
+      }
 
       this.setUpEvents();
     };
@@ -372,7 +376,8 @@
          $this.val(item[$this.attr('name')]);
        }
     },
-    tableClass: 'mb-0 table-hover table-sm'
+    tableClass: 'mb-0 table-hover table-sm',
+    containerWidth: null
   };
 
 }(jQuery));

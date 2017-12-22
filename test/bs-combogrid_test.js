@@ -693,6 +693,29 @@
   });
 
   /***********************************************/
+  asyncTest('User can define container width in options', function() {
+    $.mockjax({
+      url: '*',
+      responseText: { data: sampleData[0], recordsTotal: 12 },
+      responseTime: [10, 20]
+    });
+
+    var $el = this.elems.first();
+
+    $el.bs_combogrid({
+      containerWidth: '456px'
+    });
+    $el.triggerEnter();
+
+    setTimeout(function() {
+      var $container = $el.parent().find('.cg-container');
+      equal($container.get(0).style.width, '456px', 'The container should have the expected dimension \'456\'.');
+      start();
+    }, 25);
+
+  });
+
+  /***********************************************/
   // HELPER FUNCTIONS
   $.fn.triggerEnter = function() {
     var e = $.Event('keypress');

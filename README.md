@@ -30,6 +30,7 @@ jQuery(function($) {
 | `searchButton` | {String\|boolean} | `false` | The CSS selector of the button that triggers the search, or `false` if no button is used.<br />Note that pressing <kbd>Enter</kbd> always submits the search, regardless of using a search button or not. |
 | `onItemSelect` | {function} | See source code | A function that is run when the user selects one of the returned results, which only parameter is the selected row data.<br />By default, it searches in the selected row for a key:value pair whose key matches the input name and sets its value to the input. |
 | `tableClass` | {String} | `mb-0 table-hover table-sm` | Extra classes added to the results table. |
+| `containerWidth` | {String\|null} | `null` | If informed, sets the container's css `width` to the specified value. |
 
 ## Examples
 

@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       //files: ['test/**/*.html']
       all: {
         options: {
-          urls: ['1.9.1', '1.12.4', '2.2.4', '3.1.0'].map(function(version) {
+          urls: ['1.9.1', '1.12.4', '2.2.4', '3.2.1'].map(function(version) {
             return 'http://localhost:<%= connect.server.options.port %>/test/bs-combogrid.html?jquery=' + version;
           })
         }
