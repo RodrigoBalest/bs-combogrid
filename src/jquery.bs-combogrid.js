@@ -155,6 +155,13 @@
         this.container.css('width', comboGridInput.config.containerWidth);
       }
 
+      // Don't let container passes beyond bottom of the screen.
+      var h = document.documentElement.clientHeight - (this.container.offset().top - $(window).scrollTop());
+      this.container.css({
+        maxHeight: h,
+        overflow: 'auto'
+      });
+
       this.setUpEvents();
     };
 

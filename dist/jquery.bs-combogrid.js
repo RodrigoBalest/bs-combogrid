@@ -1,6 +1,6 @@
-/*! Bootstrap Combogrid - v2.0.3 - 2017-12-22
+/*! Bootstrap Combogrid - v2.1.0 - 2019-10-18
 * https://github.com/RodrigoBalest/bs-combogrid
-* Copyright (c) 2017 Rodrigo Balest; */
+* Copyright (c) 2019 Rodrigo Balest; */
 /*
  * bs-combogrid
  * https://github.com/RodrigoBalest/bs-combogrid
@@ -156,6 +156,13 @@
       if (comboGridInput.config.containerWidth) {
         this.container.css('width', comboGridInput.config.containerWidth);
       }
+
+      // Don't let container passes beyond bottom of the screen.
+      var h = document.documentElement.clientHeight - (this.container.offset().top - $(window).scrollTop());
+      this.container.css({
+        maxHeight: h,
+        overflow: 'auto'
+      });
 
       this.setUpEvents();
     };

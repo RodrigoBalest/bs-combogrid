@@ -1,6 +1,6 @@
-/*! Bootstrap Combogrid - v2.0.3 - 2017-12-22
+/*! Bootstrap Combogrid - v2.1.0 - 2019-10-18
 * https://github.com/RodrigoBalest/bs-combogrid
-* Copyright (c) 2017 Rodrigo Balest; */
+* Copyright (c) 2019 Rodrigo Balest; */
 .cg-container {
   position: absolute;
   z-index: 1000;
@@ -12,6 +12,14 @@
 }
 .cg-container .pager {
   margin: 0px;
+}
+.cg-container th:first-child,
+.cg-container td:first-child {
+    padding-left: 1em;
+}
+.cg-container th:last-child,
+.cg-container td:last-child {
+    padding-right: 1em;
 }
 .cg-loading {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZlcnNpb249IjEuMSI+PGNpcmNsZSBpZD0iY2lyY2xlIiBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9ImJsdWUiLz48YW5pbWF0ZSBpZD0iZ3JvdyIgeGxpbms6aHJlZj0iI2NpcmNsZSIgZHVyPSIwLjc1cyIgYXR0cmlidXRlTmFtZT0iciIgYXR0cnlidXRlVHlwZT0iWE1MIiB2YWx1ZXM9IjA7MjA7MjAiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PGFuaW1hdGUgaWQ9InZhbmlzaCIgeGxpbms6aHJlZj0iI2NpcmNsZSIgZHVyPSIwLjc1cyIgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgYXR0cnlidXRlVHlwZT0iWE1MIiB2YWx1ZXM9Ijc1Ozc1OzAiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PC9zdmc+");
